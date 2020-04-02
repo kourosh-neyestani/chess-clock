@@ -3,10 +3,44 @@ import '../style.scss';
 
 function ChessClock() {
 
+    const [times, setTimes] = useState([
+        {
+            id: 1,
+            title: "Standard 10",
+            time: 600,
+        },
+        {
+            id: 2,
+            title: "Standard 5",
+            time: 300,
+        },
+        {
+            id: 3,
+            title: "Standard 3",
+            time: 180,
+        },
+
+        {
+            id: 4,
+            title: "Standard 1",
+            time: 60,
+        },
+
+        {
+            id: 4,
+            title: "Test",
+            time: 3,
+            selected: true
+        },
+
+    ]);
+
+    const getTime = () => times.find(item => item.selected === true).time;
+
     const [playing, setPlaying] = useState(null);
 
-    const [playerA, setPlayerA] = useState(600);
-    const [playerB, setPlayerB] = useState(600);
+    const [playerA, setPlayerA] = useState(getTime());
+    const [playerB, setPlayerB] = useState(getTime());
 
     const [decrementPlayerA, setDecrementPlayerA] = useState(0);
     const [decrementPlayerB, setDecrementPlayerB] = useState(0);
@@ -59,11 +93,13 @@ function ChessClock() {
     }
 
 
-    const resetTimer = (count) => {
+    const resetTimer = () => {
+
+
         stopTimer();
 
-        setPlayerA(count)
-        setPlayerB(count)
+        setPlayerA(getTime())
+        setPlayerB(getTime())
     }
 
     return (
@@ -87,7 +123,7 @@ function ChessClock() {
                         (playing ? (<li><span className="icon icon-pause" onClick={() => stopTimer()}/></li>) : null)
                     }
                     <li>
-                        <span className="icon icon-reload" onClick={() => resetTimer(600)}/>
+                        <span className="icon icon-reload" onClick={() => resetTimer()}/>
                     </li>
                 </ul>
             </div>
