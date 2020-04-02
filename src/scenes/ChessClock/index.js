@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../style.scss';
 
 function ChessClock() {
@@ -8,6 +8,7 @@ function ChessClock() {
             id: 1,
             title: "Standard 10",
             time: 600,
+            selected: true
         },
         {
             id: 2,
@@ -25,7 +26,6 @@ function ChessClock() {
             title: "Standard 1",
             time: 60,
         },
-
         {
             id: 4,
             title: "Test",
@@ -56,12 +56,18 @@ function ChessClock() {
         return ('0' + Math.floor(player / 60)).slice(-2);
     }
 
+    useEffect(() => {
+        if (playerA <= 1 || playerB <= 1)
+            stopTimer();
+    });
+
     const startTimer = (id) => {
 
+        if (playerA <= 0 || playerB <= 0)
+            return;
+
         if (id === "A") {
-
             setPlaying("A");
-
             setDecrementPlayerB(
                 setInterval(() => {
                     setPlayerB(playerB => playerB - 0.01);
@@ -71,9 +77,7 @@ function ChessClock() {
             clearInterval(decrementPlayerA);
 
         } else if (id === "B") {
-
             setPlaying('B');
-
             setDecrementPlayerA(
                 setInterval(() => {
                     setPlayerA(playerA => playerA - 0.01);
