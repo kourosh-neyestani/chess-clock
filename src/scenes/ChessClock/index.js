@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import '../style.scss';
 
-
 function ChessClock() {
 
+    const [playerA, setPlayerA] = useState(10);
+    const [playerB, setPlayerB] = useState(10);
+
+    const [decrementPlayerA, setDecrementPlayerA] = useState(0);
+    const [decrementPlayerB, setDecrementPlayerB] = useState(0);
 
     return (
         <section className="chess-clock">
@@ -20,14 +24,13 @@ function ChessClock() {
             <div className="navigation display-center">
                 <ul>
                     <li>
-                        <span className="icon icon-gear"></span>
+                        <span className="icon icon-gear" />
                     </li>
                     <li>
-                        {/* <span className="icon icon-pause"></span> */}
-                        <span className="icon icon-play"></span>
+                        <span className="icon icon-play" />
                     </li>
                     <li>
-                        <span className="icon icon-reload"></span>
+                        <span className="icon icon-reload" />
                     </li>
                 </ul>
             </div>
