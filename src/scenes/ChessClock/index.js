@@ -3,7 +3,7 @@ import '../style.scss';
 
 function ChessClock() {
 
-    const [playing, setPlaying] = useState(false);
+    const [playing, setPlaying] = useState(null);
 
     const [playerA, setPlayerA] = useState(600);
     const [playerB, setPlayerB] = useState(600);
@@ -24,9 +24,9 @@ function ChessClock() {
 
     const startTimer = (id) => {
 
-        setPlaying(true);
-
         if (id === "A") {
+
+            setPlaying("A");
 
             setDecrementPlayerB(
                 setInterval(() => {
@@ -37,6 +37,9 @@ function ChessClock() {
             clearInterval(decrementPlayerA);
 
         } else if (id === "B") {
+
+            setPlaying('B');
+
             setDecrementPlayerA(
                 setInterval(() => {
                     setPlayerA(playerA => playerA - 0.01);
@@ -50,7 +53,7 @@ function ChessClock() {
     };
 
     const stopTimer = () => {
-        setPlaying(false);
+        setPlaying(null);
         clearInterval(decrementPlayerA);
         clearInterval(decrementPlayerB);
     }
@@ -65,12 +68,12 @@ function ChessClock() {
 
     return (
         <section className="chess-clock">
-            <div className="player-1" onClick={() => startTimer("A")}>
+            <div className={["player-1", playing === "B" && "active"].join(" ")} onClick={() => startTimer("A")}>
                 <div className="display-center">
                     <span className="timer">{getMinute("A")}:{getSecond("A")}</span>
                 </div>
             </div>
-            <div className="player-2" onClick={() => startTimer("B")}>
+            <div className={["player-2", playing === "A" && "active"].join(" ")} onClick={() => startTimer("B")}>
                 <div className="display-center">
                     <span className="timer">{getMinute("B")}:{getSecond("B")}</span>
                 </div>
