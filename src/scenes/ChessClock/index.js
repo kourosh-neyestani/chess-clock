@@ -45,6 +45,12 @@ function ChessClock() {
 
     };
 
+    const stopTimer = () => {
+        clearInterval(decrementPlayerA);
+        clearInterval(decrementPlayerB);
+    }
+
+
     return (
         <section className="chess-clock">
             <div className="player-1" onClick={() => startTimer("A")}>
@@ -63,7 +69,7 @@ function ChessClock() {
                         <span className="icon icon-gear"/>
                     </li>
                     <li>
-                        <span className="icon icon-play"/>
+                        <span className="icon icon-pause" onClick={() => stopTimer()}/>
                     </li>
                     <li>
                         <span className="icon icon-reload"/>
