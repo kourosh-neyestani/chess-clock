@@ -3,6 +3,8 @@ import '../style.scss';
 
 function ChessClock() {
 
+    const [playing, setPlaying] = useState(false);
+
     const [playerA, setPlayerA] = useState(600);
     const [playerB, setPlayerB] = useState(600);
 
@@ -21,6 +23,8 @@ function ChessClock() {
     }
 
     const startTimer = (id) => {
+
+        setPlaying(true);
 
         if (id === "A") {
 
@@ -46,10 +50,18 @@ function ChessClock() {
     };
 
     const stopTimer = () => {
+        setPlaying(false);
         clearInterval(decrementPlayerA);
         clearInterval(decrementPlayerB);
     }
 
+
+    const resetTimer = (count) => {
+        stopTimer();
+
+        setPlayerA(count)
+        setPlayerB(count)
+    }
 
     return (
         <section className="chess-clock">
@@ -68,11 +80,11 @@ function ChessClock() {
                     <li>
                         <span className="icon icon-gear"/>
                     </li>
+                    {
+                        (playing ? (<li><span className="icon icon-pause" onClick={() => stopTimer()}/></li>) : null)
+                    }
                     <li>
-                        <span className="icon icon-pause" onClick={() => stopTimer()}/>
-                    </li>
-                    <li>
-                        <span className="icon icon-reload"/>
+                        <span className="icon icon-reload" onClick={() => resetTimer(600)}/>
                     </li>
                 </ul>
             </div>
