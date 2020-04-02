@@ -9,6 +9,16 @@ function ChessClock() {
     const [decrementPlayerA, setDecrementPlayerA] = useState(0);
     const [decrementPlayerB, setDecrementPlayerB] = useState(0);
 
+    const getSecond = (id) => {
+        let player = (id === "A") ? playerA : playerB;
+        return `0${parseInt(player % 60)}`.slice(-2);
+    };
+
+    const getMinute = (id) => {
+        let player = (id === "B") ? playerA : playerB;
+        return ('0' + Math.floor(player / 60)).slice(-2);
+    };
+
     return (
         <section className="chess-clock">
             <div className="player-1">
