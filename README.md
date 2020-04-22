@@ -10,7 +10,8 @@ Choose your time control and you're ready to play. The 2nd player presses her bu
 
 ## Installing
 
-In the project directory, you can run: `npm install`
+In the project directory, you can run: `npm install`.
+
 And after installation, you can run: `npm start`
 
 ## License
